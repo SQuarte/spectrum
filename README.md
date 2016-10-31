@@ -1,5 +1,10 @@
 # Spectrum
-## The No Hassle Colorpicker
+
+##
+
+This is a fork of the work done by Brian Grinstead, You can get his original work over at: https://github.com/bgrins/spectrum
+
+## The No Hassle colorpicker
 
 See the demo and docs: http://anarcie.github.io/spectrum.
 
