@@ -1,6 +1,6 @@
 # Spectrum
 
-##
+##Important
 
 This is a fork of the work done by Brian Grinstead, You can get his original work over at: https://github.com/bgrins/spectrum
 
