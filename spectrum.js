@@ -26,6 +26,7 @@
             hide: noop,
             dragStart: noop,
             dragStop: noop,
+            cancel: noop,
 
             // Options
             color: false,
@@ -172,8 +173,9 @@
             'show': bind(opts.show, callbackContext),
             'hide': bind(opts.hide, callbackContext),
             'beforeShow': bind(opts.beforeShow, callbackContext),
-            'dragStart': bind(opts.beforeShow, callbackContext),
-            'dragStop': bind(opts.beforeShow, callbackContext)
+            'dragStart': bind(opts.dragStart, callbackContext),
+            'dragStop': bind(opts.dragStop, callbackContext),
+            'cancel': bind(opts.cancel, callbackContext)
         };
 
         return opts;
@@ -343,6 +345,9 @@
                 e.preventDefault();
                 revert();
                 hide();
+                callbacks.cancel(get());
+                boundElement.trigger('cancel.spectrum', [get()]);
+
             });
 
             clearButton.attr("title", opts.clearText);
@@ -573,13 +578,15 @@
             isDragging = true;
             container.addClass(draggingClass);
             shiftMovementDirection = null;
-            boundElement.trigger('dragstart.spectrum', [get()]);
+            callbacks.dragStart(get());
+            boundElement.trigger('dragStart.spectrum', [get()]);
         }
 
         function dragStop() {
             isDragging = false;
             container.removeClass(draggingClass);
-            boundElement.trigger('dragstop.spectrum', [get()]);
+            callbacks.dragStop(get());
+            boundElement.trigger('dragStop.spectrum', [get()]);
         }
 
         function setFromTextInput() {
@@ -744,10 +751,11 @@
 
         function move() {
             updateUI();
-
             callbacks.move(get());
             boundElement.trigger('move.spectrum', [get()]);
         }
+
+
 
         function updateUI() {
 
